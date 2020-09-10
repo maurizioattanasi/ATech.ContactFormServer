@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ATech.ContactFormServer.Api</name>
+    </assembly>
+    <members>
+        <member name="T:ATech.ContactFormServer.Api.Controllers.SystemController">
+            <summary>
+            System Utilities Controller
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.SystemController.#ctor(MediatR.IMediator)">
+            <summary>
+            Class constructor
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.SystemController.Ping">
+            <summary>
+            System heartbeat function
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
