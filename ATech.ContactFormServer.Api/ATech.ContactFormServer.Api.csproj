@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Maurizio Attanasi</Authors>
+    <UserSecretsId>078A46F6-7C8A-4825-95DE-A3DF54074900</UserSecretsId>
     <Version>0.0.1</Version>
     <Description>A .NET Core WebApi to use on static sites with contact form</Description>
     <PackageReleaseNotes>project setup</PackageReleaseNotes>
