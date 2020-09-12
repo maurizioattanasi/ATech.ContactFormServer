@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 namespace ATech.ContactFormServer.Api
 {
 #pragma warning disable CS1591
@@ -41,6 +44,10 @@ namespace ATech.ContactFormServer.Api
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // TODO: Add database configuration here
+            services.AddDbContext<ContactFormServerDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("ContactFormServerDbContext"), x =>
+                {
+                    x.CommandTimeout(30000);
+                }), ServiceLifetime.Transient);
 
             // Registering Swagger Generator
             services.AddSwaggerGen(c =>

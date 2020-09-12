@@ -4,5 +4,41 @@
         <name>ATech.ContactFormServer.Domain</name>
     </assembly>
     <members>
+        <member name="T:ATech.ContactFormServer.Domain.Entities.ContactFormMessage">
+            <summary>
+            A single Contact Form Message Item
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Id">
+            <summary>
+            Item Unique Id
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Name">
+            <summary>
+            Message sender Name
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.EMail">
+            <summary>
+            Sender email address
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Message">
+            <summary>
+            Message content
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Created">
+            <summary>
+            Message creation time
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.CreatedBy">
+            <summary>
+            Message creator entity (tipically the id of the account)
+            </summary>
+            <value></value>
+        </member>
     </members>
 </doc>
