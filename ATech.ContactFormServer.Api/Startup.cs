@@ -47,7 +47,7 @@ namespace ATech.ContactFormServer.Api
             services.AddDbContext<ContactFormServerDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("ContactFormServerDbContext"), x =>
                 {
                     x.CommandTimeout(30000);
-                }), ServiceLifetime.Transient);
+                }), ServiceLifetime.Scoped);
 
             // Registering Swagger Generator
             services.AddSwaggerGen(c =>
