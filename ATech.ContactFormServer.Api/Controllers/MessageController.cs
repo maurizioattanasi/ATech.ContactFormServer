@@ -37,7 +37,7 @@ namespace ATech.ContactFormServer.Api.Controllers
         {
             try
             {
-                var messages = this.mediator.Send(new Features.Message.GetAll(page, pageSize));
+                var messages = await this.mediator.Send(new Features.Message.GetAll(page, pageSize));
 
                 return Ok(messages);
             }
