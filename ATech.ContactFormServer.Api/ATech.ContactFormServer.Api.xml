@@ -4,6 +4,24 @@
         <name>ATech.ContactFormServer.Api</name>
     </assembly>
     <members>
+        <member name="T:ATech.ContactFormServer.Api.Controllers.MessageController">
+            <summary>
+            Message Controller
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(ATech.ContactFormServer.Domain.DTO.MessageDto)">
+            <summary>
+            Creates a new message item
+            </summary>
+            <param name="messageDto"></param>
+            <returns></returns>
+        </member>
         <member name="T:ATech.ContactFormServer.Api.Controllers.SystemController">
             <summary>
             System Utilities Controller
@@ -20,6 +38,17 @@
             System heartbeat function
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:ATech.ContactFormServer.Api.Features.Message.Add">
+            <summary>
+            Adds a new message
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Features.Message.Add.#ctor(ATech.ContactFormServer.Domain.DTO.MessageDto)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message"></param>
         </member>
     </members>
 </doc>

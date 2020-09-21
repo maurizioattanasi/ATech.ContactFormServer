@@ -7,7 +7,7 @@ namespace ATech.ContactFormServer.Domain.Repositories
 #pragma warning disable CS1591
     public interface IContactFormServerUnitOfWork : IDisposable
     {
-        IContactFormMessageRepository ContactFormMessageRepository { get; }
+        IContactFormMessageRepository ContactFormMessages { get; }
 
         int Complete();
 

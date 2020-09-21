@@ -14,10 +14,10 @@ namespace ATech.ContactFormServer.Api.Repositories
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
 
-            this.ContactFormMessageRepository = new ContactFormMessageRepository(context);
+            this.ContactFormMessages = new ContactFormMessageRepository(context);
         }
 
-        public IContactFormMessageRepository ContactFormMessageRepository { get; private set; }
+        public IContactFormMessageRepository ContactFormMessages { get; private set; }
 
         public int Complete()
         {
