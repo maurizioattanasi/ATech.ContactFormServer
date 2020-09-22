@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ATech.ContactFormServer.Api.Migrations
 {
     [DbContext(typeof(ContactFormServerDbContext))]
-    [Migration("20200912182050_initial")]
+    [Migration("20200922082556_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

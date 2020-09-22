@@ -56,10 +56,11 @@ namespace ATech.ContactFormServer.Api.Features.Message
                         return messages
                             .OrderByDescending(m => m.Created)
                             .Skip(skipAmount)
-                            .Take(request.pageSize.Value);
+                            .Take(request.pageSize.Value)
+                            .ToList();
                     }
 
-                    return messages;
+                    return messages.ToList();
                 }
                 catch (Exception ex)
                 {

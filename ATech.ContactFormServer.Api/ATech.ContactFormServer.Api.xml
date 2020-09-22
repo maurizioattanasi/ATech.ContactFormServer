@@ -15,6 +15,14 @@
             </summary>
             <param name="mediator"></param>
         </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns all the contact messages
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
         <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(ATech.ContactFormServer.Domain.DTO.MessageDto)">
             <summary>
             Creates a new message item
@@ -49,6 +57,18 @@
             Constructor
             </summary>
             <param name="message"></param>
+        </member>
+        <member name="T:ATech.ContactFormServer.Api.Features.Message.GetAll">
+            <summary>
+            Returns all the messages
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Features.Message.GetAll.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Constgructor
+            </summary>
+            <param name="page"></param>
+            <param name="pageSize"></param>
         </member>
     </members>
 </doc>
