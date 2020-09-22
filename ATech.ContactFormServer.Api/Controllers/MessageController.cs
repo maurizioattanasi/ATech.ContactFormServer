@@ -69,7 +69,7 @@ namespace ATech.ContactFormServer.Api.Controllers
             {
                 var id = await this.mediator.Send(new Features.Message.Add(messageDto));
 
-                return Ok("https://maurizioattanasi.it/contact");
+                return Ok(id);
             }
             catch (Exception ex)
             {
