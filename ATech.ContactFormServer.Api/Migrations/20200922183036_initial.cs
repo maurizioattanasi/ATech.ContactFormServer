@@ -12,8 +12,9 @@ namespace ATech.ContactFormServer.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    EMail = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    EMail = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     CreatedBy = table.Column<string>(nullable: true)

@@ -1,8 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ATech.ContactFormServer.Api.DTO;
 using ATech.ContactFormServer.Api.Repositories;
-using ATech.ContactFormServer.Domain.DTO;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
@@ -13,14 +13,20 @@ namespace ATech.ContactFormServer.Api.Features.Message
     /// </summary>
     public class Add : IRequest<Guid>
     {
+        private readonly string email;
         private readonly MessageDto message;
 
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="email"></param>
         /// <param name="message"></param>
-        public Add(Domain.DTO.MessageDto message)
+        public Add(string email, MessageDto message)
         {
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentException($"'{nameof(email)}' cannot be null or empty", nameof(email));
+
+            this.email = email;
             this.message = message ?? throw new ArgumentNullException(nameof(message));
 
             if (string.IsNullOrEmpty(message.Name))
@@ -47,26 +53,38 @@ namespace ATech.ContactFormServer.Api.Features.Message
 
             public async Task<Guid> Handle(Add request, CancellationToken cancellationToken)
             {
-                using var unitOfWork = new ContactFormServerUnitOfWork(context);
-
-                var message = new Domain.Entities.ContactFormMessage
+                try
                 {
-                    Id = Guid.NewGuid(),
-                    Name = request.message.Name,
-                    EMail = request.message.EMail,
-                    Message = request.message.Message,
-                    Created = DateTime.UtcNow,
-                    CreatedBy = "me"
-                };
+                    using var unitOfWork = new ContactFormServerUnitOfWork(context);
 
-                await unitOfWork
-                    .ContactFormMessages
-                    .AddAsync(message, cancellationToken)
-                    .ConfigureAwait(false);
+                    if (!string.IsNullOrEmpty(request.message.Honeypot))
+                        throw new Exception($"Spam detected");
 
-                await unitOfWork.CompleteAsync(cancellationToken);
+                    var message = new Domain.Entities.ContactFormMessage
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = request.message.Name,
+                        EMail = request.message.EMail,
+                        Message = request.message.Message,
+                        Created = DateTime.UtcNow,
+                        CreatedBy = "me"
+                    };
 
-                return message.Id;
+                    await unitOfWork
+                        .ContactFormMessages
+                        .AddAsync(message, cancellationToken)
+                        .ConfigureAwait(false);
+
+                    await unitOfWork.CompleteAsync(cancellationToken);
+
+                    return message.Id;
+                }
+                catch (Exception ex)
+                {
+                    string content = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                    this.logger.LogError(content);
+                    throw ex;
+                }
             }
         }
     }

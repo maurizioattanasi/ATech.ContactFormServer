@@ -59,15 +59,16 @@ namespace ATech.ContactFormServer.Api.Controllers
         /// <summary>
         /// Creates a new message item
         /// </summary>
+        /// <param name="email"></param>
         /// <param name="messageDto"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("[action]")]
-        public async Task<IActionResult> Submit([FromForm] Domain.DTO.MessageDto messageDto)
+        [Route("[action]/{email}")]
+        public async Task<IActionResult> Submit([FromRoute] string email, [FromBody] DTO.MessageDto messageDto)
         {
             try
             {
-                var id = await this.mediator.Send(new Features.Message.Add(messageDto));
+                var id = await this.mediator.Send(new Features.Message.Add(email, messageDto));
 
                 return Ok(id);
             }

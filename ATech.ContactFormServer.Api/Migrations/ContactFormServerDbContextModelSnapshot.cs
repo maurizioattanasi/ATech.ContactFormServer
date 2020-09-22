@@ -29,12 +29,17 @@ namespace ATech.ContactFormServer.Api.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EMail")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

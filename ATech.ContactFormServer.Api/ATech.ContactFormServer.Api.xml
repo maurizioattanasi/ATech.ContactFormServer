@@ -23,10 +23,11 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(ATech.ContactFormServer.Domain.DTO.MessageDto)">
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(System.String,ATech.ContactFormServer.Api.DTO.MessageDto)">
             <summary>
             Creates a new message item
             </summary>
+            <param name="email"></param>
             <param name="messageDto"></param>
             <returns></returns>
         </member>
@@ -47,15 +48,46 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ATech.ContactFormServer.Api.DTO.MessageDto">
+            <summary>
+            Message model
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.Name">
+            <summary>
+            Message sender Name
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.EMail">
+            <summary>
+            Sender email address
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.PhoneNumber">
+            <summary>
+            Sender Phone Number
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.Message">
+            <summary>
+            Message content
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.Honeypot">
+            <summary>
+            Honeypot check for SPAM BOTS protection
+            </summary>
+        </member>
         <member name="T:ATech.ContactFormServer.Api.Features.Message.Add">
             <summary>
             Adds a new message
             </summary>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Features.Message.Add.#ctor(ATech.ContactFormServer.Domain.DTO.MessageDto)">
+        <member name="M:ATech.ContactFormServer.Api.Features.Message.Add.#ctor(System.String,ATech.ContactFormServer.Api.DTO.MessageDto)">
             <summary>
             Constructor
             </summary>
+            <param name="email"></param>
             <param name="message"></param>
         </member>
         <member name="T:ATech.ContactFormServer.Api.Features.Message.GetAll">
