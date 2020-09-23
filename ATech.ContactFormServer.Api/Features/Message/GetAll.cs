@@ -5,7 +5,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using ATech.ContactFormServer.Api.Repositories;
 using ATech.ContactFormServer.Domain.Entities;
+using ATech.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ATech.ContactFormServer.Api.Features.Message
@@ -13,23 +15,26 @@ namespace ATech.ContactFormServer.Api.Features.Message
     /// <summary>
     /// Returns all the messages
     /// </summary>
-    public class GetAll : IRequest<IEnumerable<Domain.Entities.ContactFormMessage>>
+    public class GetAll : IRequest<IEnumerable<Domain.Entities.Message>>
     {
+        private readonly Guid accountId;
         private readonly int? page;
         private readonly int? pageSize;
 
         /// <summary>
         /// Constgructor
         /// </summary>
+        /// <param name="accountId"></param>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
-        public GetAll(int? page = null, int? pageSize = null)
+        public GetAll(Guid accountId, int? page = null, int? pageSize = null)
         {
+            this.accountId = accountId;
             this.page = page;
             this.pageSize = pageSize;
         }
 
-        class GetAllHandlar : IRequestHandler<GetAll, IEnumerable<Domain.Entities.ContactFormMessage>>
+        class GetAllHandlar : IRequestHandler<GetAll, IEnumerable<Domain.Entities.Message>>
         {
             private readonly ContactFormServerDbContext context;
             private readonly ILogger<GetAllHandlar> logger;
@@ -41,13 +46,18 @@ namespace ATech.ContactFormServer.Api.Features.Message
                 this.logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
             }
 
-            public async Task<IEnumerable<ContactFormMessage>> Handle(GetAll request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<Domain.Entities.Message>> Handle(GetAll request, CancellationToken cancellationToken)
             {
                 try
                 {
                     using var unitOfWork = new ContactFormServerUnitOfWork(context);
 
-                    var messages = await unitOfWork.ContactFormMessages.GetAllAsync(cancellationToken);
+                    var account = await unitOfWork.Accounts.GetAsync(request.accountId, cancellationToken).ConfigureAwait(false);
+
+                    if(account is null)
+                        throw new HttpException(StatusCodes.Status404NotFound, $"No account with Id {request.accountId} has been found");
+
+                    var messages = account.Messages;
 
                     if (request.page.HasValue && request.pageSize.HasValue)
                     {
@@ -56,11 +66,10 @@ namespace ATech.ContactFormServer.Api.Features.Message
                         return messages
                             .OrderByDescending(m => m.Created)
                             .Skip(skipAmount)
-                            .Take(request.pageSize.Value)
-                            .ToList();
+                            .Take(request.pageSize.Value);
                     }
 
-                    return messages.ToList(); // TODO:
+                    return messages; // TODO:
                 }
                 catch (Exception ex)
                 {

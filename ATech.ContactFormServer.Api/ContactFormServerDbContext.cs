@@ -29,15 +29,31 @@ namespace ATech.ContactFormServer.Api
             }
         }
 
-        public DbSet<ContactFormMessage> ContactFormMessage { get; set; }
+        public DbSet<Account> Account { get; set; }
+
+        public DbSet<Message> Message { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            #region  Account
+            
             builder
-                .Entity<ContactFormMessage>()
+                .Entity<Account>()
+                .HasKey(a => a.Id);
+
+            builder
+                .Entity<Account>()
+                .HasIndex(a => a.Id)
+                .IsUnique();
+            #endregion
+
+            #region Message
+            builder
+                .Entity<Message>()
                 .HasKey(m => m.Id);
+            #endregion
         }
     }
 #pragma warning disable CS1591

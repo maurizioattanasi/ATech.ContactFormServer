@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ATech.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,18 +29,31 @@ namespace ATech.ContactFormServer.Api.Controllers
         /// <summary>
         /// Returns all the contact messages
         /// </summary>
+        /// <param name="accountId"></param>
         /// <param name="page"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("[action]")]
-        public async Task<ActionResult<IEnumerable<Domain.Entities.ContactFormMessage>>> GetAll(int? page = null, int? pageSize = null)
+        [Route("[action]/{accountId}")]
+        public async Task<ActionResult<IEnumerable<Domain.Entities.Message>>> GetAll([FromRoute] Guid accountId, int? page = null, int? pageSize = null)
         {
             try
             {
-                var messages = await this.mediator.Send(new Features.Message.GetAll(page, pageSize));
+                var messages = await this.mediator.Send(new Features.Message.GetAll(accountId, page, pageSize));
 
                 return Ok(messages);
+            }
+            catch (HttpException ex)
+            {
+                string content = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
+                var problemDetails = new ProblemDetails()
+                {
+                    Status = ex.StatusCode,
+                    Detail = content,
+                    Instance = $"/AddMessage",
+                };
+
+                return BadRequest(problemDetails);
             }
             catch (Exception ex)
             {
@@ -59,16 +73,16 @@ namespace ATech.ContactFormServer.Api.Controllers
         /// <summary>
         /// Creates a new message item
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="accountId"></param>
         /// <param name="messageDto"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("[action]/{email}")]
-        public async Task<ActionResult<Guid>> Submit([FromRoute] string email, [FromBody] DTO.MessageDto messageDto)
+        [Route("[action]/{accountId}")]
+        public async Task<ActionResult<Guid>> Submit([FromRoute] Guid accountId, [FromBody] DTO.MessageDto messageDto)
         {
             try
             {
-                var id = await this.mediator.Send(new Features.Message.Add(email, messageDto));
+                var id = await this.mediator.Send(new Features.Message.Add(accountId, messageDto));
 
                 return Ok(id);
             }

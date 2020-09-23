@@ -3,7 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using ATech.ContactFormServer.Api.DTO;
 using ATech.ContactFormServer.Api.Repositories;
+using ATech.Infrastructure.Exceptions;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
@@ -14,20 +16,17 @@ namespace ATech.ContactFormServer.Api.Features.Message
     /// </summary>
     public class Add : IRequest<Guid>
     {
-        private readonly string email;
+        private readonly Guid accountId;
         private readonly MessageDto message;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="accountId"></param>
         /// <param name="message"></param>
-        public Add(string email, MessageDto message)
+        public Add(Guid accountId, MessageDto message)
         {
-            if (string.IsNullOrEmpty(email))
-                throw new ArgumentException($"'{nameof(email)}' cannot be null or empty", nameof(email));
-
-            this.email = email;
+            this.accountId = accountId;
             this.message = message ?? throw new ArgumentNullException(nameof(message));
 
             if (string.IsNullOrEmpty(message.Name))
@@ -59,23 +58,29 @@ namespace ATech.ContactFormServer.Api.Features.Message
                     using var unitOfWork = new ContactFormServerUnitOfWork(context);
 
                     if (!string.IsNullOrEmpty(request.message.Honeypot))
-                        throw new Exception($"Spam detected{Environment.NewLine}Account: {request.email}{Environment.NewLine}Payolad: {JsonConvert.SerializeObject(request.message)}");
+                        throw new Exception($"Spam detected{Environment.NewLine}Account: {request.accountId}{Environment.NewLine}Payolad: {JsonConvert.SerializeObject(request.message)}");
 
-                    var message = new Domain.Entities.ContactFormMessage
+                    var account = await unitOfWork.Accounts.GetAsync(request.accountId, cancellationToken).ConfigureAwait(false);
+
+                    if (account is null)
+                        throw new HttpException(StatusCodes.Status404NotFound, $"No account with Id {request.accountId} has been found");
+
+                    if (!account.Enabled)
+                        throw new HttpException(StatusCodes.Status403Forbidden, $"{account.Id} is not enabled yet");
+
+                    var message = new Domain.Entities.Message
                     {
                         Id = Guid.NewGuid(),
                         Name = request.message.Name,
                         EMail = request.message.EMail,
                         PhoneNumber = request.message.Phone,
-                        Message = request.message.Message,
+                        Text = request.message.Message,
+                        AccountId = account.Id,
                         Created = DateTime.UtcNow,
-                        CreatedBy = "me"
+                        CreatedBy = "me",
                     };
 
-                    await unitOfWork
-                        .ContactFormMessages
-                        .AddAsync(message, cancellationToken)
-                        .ConfigureAwait(false);
+                    await unitOfWork.Messages.AddAsync(message, cancellationToken).ConfigureAwait(false);
 
                     await unitOfWork.CompleteAsync(cancellationToken);
 
