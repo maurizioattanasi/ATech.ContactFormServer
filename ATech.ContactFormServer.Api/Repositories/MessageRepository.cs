@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace ATech.ContactFormServer.Api.Repositories
 {
 #pragma warning disable CS1591
-    public class ContactFormMessageRepository : Repository<ContactFormMessage>, IContactFormMessageRepository
+    public class MessageRepository : Repository<Message>, IMessageRepository
     {
-        public ContactFormMessageRepository(DbContext context)
+        public MessageRepository(DbContext context)
             : base(context) { }
     }
 #pragma warning restore CS1591

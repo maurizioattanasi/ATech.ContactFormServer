@@ -1,12 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ATech.ContactFormServer.Domain.Entities
 {
     /// <summary>
     /// A single Contact Form Message Item
     /// </summary>
-    public class ContactFormMessage
+    public class Message
     {
         /// <summary>
         /// Item Unique Id
@@ -31,9 +32,15 @@ namespace ATech.ContactFormServer.Domain.Entities
         public string PhoneNumber { get; set; }
 
         /// <summary>
+        /// Message Owner Account
+        /// </summary>
+        [JsonIgnore]
+        public Guid AccountId { get; set; }
+
+        /// <summary>
         /// Message content
         /// </summary>
-        public string Message { get; set; }
+        public string Text { get; set; }
 
         /// <summary>
         /// Message creation time

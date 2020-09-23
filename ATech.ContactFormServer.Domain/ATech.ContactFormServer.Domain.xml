@@ -4,42 +4,97 @@
         <name>ATech.ContactFormServer.Domain</name>
     </assembly>
     <members>
-        <member name="T:ATech.ContactFormServer.Domain.Entities.ContactFormMessage">
+        <member name="T:ATech.ContactFormServer.Domain.Entities.Account">
+            <summary>
+            Account Entity
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Domain.Entities.Account.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.Id">
+            <summary>
+            User's unique id
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.EMail">
+            <summary>
+            User's registration email
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.Messages">
+            <summary>
+            Account's messages
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.Enabled">
+            <summary>
+            Account's enabling flag
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.Created">
+            <summary>
+            Account creation Date
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.CreatedBy">
+            <summary>
+            Item creator entity
+            </summary>        
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.Modified">
+            <summary>
+            Item editing date time
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Account.ModifiedBy">
+            <summary>
+            Item editor entity
+            </summary>
+        </member>
+        <member name="T:ATech.ContactFormServer.Domain.Entities.Message">
             <summary>
             A single Contact Form Message Item
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Id">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.Id">
             <summary>
             Item Unique Id
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Name">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.Name">
             <summary>
             Message sender Name
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.EMail">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.EMail">
             <summary>
             Sender email address
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.PhoneNumber">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.PhoneNumber">
             <summary>
             Sender Phone Number
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Message">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.AccountId">
+            <summary>
+            Message Owner Account
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.Text">
             <summary>
             Message content
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Created">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.Created">
             <summary>
             Message creation time
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.CreatedBy">
+        <member name="P:ATech.ContactFormServer.Domain.Entities.Message.CreatedBy">
             <summary>
             Message creator entity (tipically the id of the account)
             </summary>

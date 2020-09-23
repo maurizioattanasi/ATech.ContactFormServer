@@ -4,6 +4,24 @@
         <name>ATech.ContactFormServer.Api</name>
     </assembly>
     <members>
+        <member name="T:ATech.ContactFormServer.Api.Controllers.AccountController">
+            <summary>
+            Account controller
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.AccountController.#ctor(MediatR.IMediator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="mediator"></param>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Controllers.AccountController.Register(System.String)">
+            <summary>
+            Registers a new account item
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
         <member name="T:ATech.ContactFormServer.Api.Controllers.MessageController">
             <summary>
             Message Controller
@@ -15,19 +33,20 @@
             </summary>
             <param name="mediator"></param>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.GetAll(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.GetAll(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Returns all the contact messages
             </summary>
+            <param name="accountId"></param>
             <param name="page"></param>
             <param name="pageSize"></param>
             <returns></returns>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(System.String,ATech.ContactFormServer.Api.DTO.MessageDto)">
+        <member name="M:ATech.ContactFormServer.Api.Controllers.MessageController.Submit(System.Guid,ATech.ContactFormServer.Api.DTO.MessageDto)">
             <summary>
             Creates a new message item
             </summary>
-            <param name="email"></param>
+            <param name="accountId"></param>
             <param name="messageDto"></param>
             <returns></returns>
         </member>
@@ -78,16 +97,26 @@
             Honeypot check for SPAM BOTS protection
             </summary>
         </member>
+        <member name="T:ATech.ContactFormServer.Api.Features.Account.Add">
+            <summary>
+            Adds a new account item
+            </summary>
+        </member>
+        <member name="M:ATech.ContactFormServer.Api.Features.Account.Add.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="T:ATech.ContactFormServer.Api.Features.Message.Add">
             <summary>
             Adds a new message
             </summary>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Features.Message.Add.#ctor(System.String,ATech.ContactFormServer.Api.DTO.MessageDto)">
+        <member name="M:ATech.ContactFormServer.Api.Features.Message.Add.#ctor(System.Guid,ATech.ContactFormServer.Api.DTO.MessageDto)">
             <summary>
             Constructor
             </summary>
-            <param name="email"></param>
+            <param name="accountId"></param>
             <param name="message"></param>
         </member>
         <member name="T:ATech.ContactFormServer.Api.Features.Message.GetAll">
@@ -95,12 +124,111 @@
             Returns all the messages
             </summary>
         </member>
-        <member name="M:ATech.ContactFormServer.Api.Features.Message.GetAll.#ctor(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:ATech.ContactFormServer.Api.Features.Message.GetAll.#ctor(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Constgructor
             </summary>
+            <param name="accountId"></param>
             <param name="page"></param>
             <param name="pageSize"></param>
+        </member>
+        <member name="T:ATech.Infrastructure.Exceptions.HttpException">
+            <summary>
+            Http Exception
+            </summary>
+        </member>
+        <member name="M:ATech.Infrastructure.Exceptions.HttpException.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="statusCode"></param>
+            <param name="content"></param>
+        </member>
+        <member name="P:ATech.Infrastructure.Exceptions.HttpException.StatusCode">
+            <summary>
+            HttpStatus Code
+            </summary>
+        </member>
+        <member name="P:ATech.Infrastructure.Exceptions.HttpException.Content">
+            <summary>
+            Exception's message
+            </summary>
+        </member>
+        <member name="T:Bore.Infrastructure.Extensions.StringExtensions">
+            <summary>
+            String Extensions
+            </summary>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.IsNullOrEmpty(System.String)">
+            <summary>
+            Check if the string is Null or Empty
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Check if the string is Null or White Space
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.IsLetterlOnly(System.String)">
+            <summary>
+            Check if the string contains only letters (No number or special characters)
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.IsEmail(System.String)">
+            <summary>
+            Verifies if the string content is a valid email
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.ToStream(System.String,System.Text.Encoding)">
+            <summary>
+            Returns a MemoryStream from a given object
+            </summary>
+            <param name="str">The string to process</param>
+            <param name="encoding">The desired encoding (default is UTF8)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.Escape(System.String)">
+            <summary>
+            Replaces invalid XML characters in a string with their valid XML equivalent.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.Capitalize(System.String)">
+            <summary>
+            Prettyfies the given string 
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.CountWords(System.String)">
+            <summary>
+            Counts the number of words in a string
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.FirstWord(System.String)">
+            <summary>
+            Returns the first word in a string
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Bore.Infrastructure.Extensions.StringExtensions.LastWord(System.String)">
+            <summary>
+            Returns the last word in a string
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
