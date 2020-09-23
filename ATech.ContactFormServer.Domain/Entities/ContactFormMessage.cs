@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ATech.ContactFormServer.Domain.Entities
 {
@@ -15,12 +16,19 @@ namespace ATech.ContactFormServer.Domain.Entities
         /// <summary>
         /// Message sender Name
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// Sender email address
         /// </summary>
+        [Required]
         public string EMail { get; set; }
+
+        /// <summary>
+        /// Sender Phone Number
+        /// </summary>
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Message content

@@ -64,7 +64,7 @@ namespace ATech.ContactFormServer.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]/{email}")]
-        public async Task<IActionResult> Submit([FromRoute] string email, [FromBody] DTO.MessageDto messageDto)
+        public async Task<ActionResult<Guid>> Submit([FromRoute] string email, [FromBody] DTO.MessageDto messageDto)
         {
             try
             {

@@ -5,6 +5,7 @@ using ATech.ContactFormServer.Api.DTO;
 using ATech.ContactFormServer.Api.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace ATech.ContactFormServer.Api.Features.Message
 {
@@ -58,13 +59,14 @@ namespace ATech.ContactFormServer.Api.Features.Message
                     using var unitOfWork = new ContactFormServerUnitOfWork(context);
 
                     if (!string.IsNullOrEmpty(request.message.Honeypot))
-                        throw new Exception($"Spam detected");
+                        throw new Exception($"Spam detected{Environment.NewLine}Account: {request.email}{Environment.NewLine}Payolad: {JsonConvert.SerializeObject(request.message)}");
 
                     var message = new Domain.Entities.ContactFormMessage
                     {
                         Id = Guid.NewGuid(),
                         Name = request.message.Name,
                         EMail = request.message.EMail,
+                        PhoneNumber = request.message.Phone,
                         Message = request.message.Message,
                         Created = DateTime.UtcNow,
                         CreatedBy = "me"
@@ -83,7 +85,8 @@ namespace ATech.ContactFormServer.Api.Features.Message
                 {
                     string content = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                     this.logger.LogError(content);
-                    throw ex;
+                    return Guid.Empty;
+                    // throw ex;
                 }
             }
         }

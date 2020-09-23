@@ -63,7 +63,7 @@
             Sender email address
             </summary>
         </member>
-        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.PhoneNumber">
+        <member name="P:ATech.ContactFormServer.Api.DTO.MessageDto.Phone">
             <summary>
             Sender Phone Number
             </summary>

@@ -4,26 +4,6 @@
         <name>ATech.ContactFormServer.Domain</name>
     </assembly>
     <members>
-        <member name="T:ATech.ContactFormServer.Domain.DTO.MessageDto">
-            <summary>
-            Message model
-            </summary>
-        </member>
-        <member name="P:ATech.ContactFormServer.Domain.DTO.MessageDto.Name">
-            <summary>
-            Message sender Name
-            </summary>
-        </member>
-        <member name="P:ATech.ContactFormServer.Domain.DTO.MessageDto.EMail">
-            <summary>
-            Sender email address
-            </summary>
-        </member>
-        <member name="P:ATech.ContactFormServer.Domain.DTO.MessageDto.Message">
-            <summary>
-            Message content
-            </summary>
-        </member>
         <member name="T:ATech.ContactFormServer.Domain.Entities.ContactFormMessage">
             <summary>
             A single Contact Form Message Item
@@ -42,6 +22,11 @@
         <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.EMail">
             <summary>
             Sender email address
+            </summary>
+        </member>
+        <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.PhoneNumber">
+            <summary>
+            Sender Phone Number
             </summary>
         </member>
         <member name="P:ATech.ContactFormServer.Domain.Entities.ContactFormMessage.Message">

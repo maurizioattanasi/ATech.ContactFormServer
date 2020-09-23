@@ -20,7 +20,7 @@ namespace ATech.ContactFormServer.Api.DTO
         /// <summary>
         /// Sender Phone Number
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Message content
