@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../ATech.ContactFormServer.Domain/ATech.ContactFormServer.Domain.csproj" />
-    <ProjectReference Include="..\ATech.ContactFormServer.Infrastructure\ATech.ContactFormServer.Infrastructure.csproj" />
+    <ProjectReference Include="../ATech.ContactFormServer.Infrastructure/ATech.ContactFormServer.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
