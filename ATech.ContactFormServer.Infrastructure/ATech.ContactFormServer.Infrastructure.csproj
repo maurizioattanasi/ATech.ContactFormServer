@@ -10,18 +10,14 @@
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>ATech.ContactFormServer.Domain.xml</DocumentationFile>
-    <OutputPath></OutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>ATech.ContactFormServer.Domain.xml</DocumentationFile>
-    <OutputPath></OutputPath>
-  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ATech.ContactFormServer.Domain\ATech.ContactFormServer.Domain.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ATech.Repository" Version="1.0.2" />
+    <PackageReference Include="MediatR" Version="8.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 

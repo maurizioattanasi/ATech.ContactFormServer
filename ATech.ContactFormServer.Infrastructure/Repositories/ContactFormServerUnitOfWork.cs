@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ATech.ContactFormServer.Domain.Repositories;
+using ATech.ContactFormServer.Infrastructure;
 
 namespace ATech.ContactFormServer.Api.Repositories
 {

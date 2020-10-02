@@ -6,7 +6,7 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Bore.Infrastructure.Extensions
+namespace ATech.ContactFormServer.Infrastructure.Extensions
 {
 
     /// <summary>

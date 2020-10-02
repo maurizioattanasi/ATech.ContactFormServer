@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ATech.Infrastructure.Exceptions;
+using ATech.ContactFormServer.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +39,7 @@ namespace ATech.ContactFormServer.Api.Controllers
         {
             try
             {
-                var messages = await this.mediator.Send(new Features.Message.GetAll(accountId, page, pageSize));
+                var messages = await this.mediator.Send(new Infrastructure.Features.Message.GetAll(accountId, page, pageSize));
 
                 return Ok(messages);
             }
@@ -78,11 +78,11 @@ namespace ATech.ContactFormServer.Api.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]/{accountId}")]
-        public async Task<ActionResult<Guid>> Submit([FromRoute] Guid accountId, [FromBody] DTO.MessageDto messageDto)
+        public async Task<ActionResult<Guid>> Submit([FromRoute] Guid accountId, [FromBody] Infrastructure.DTO.MessageDto messageDto)
         {
             try
             {
-                var id = await this.mediator.Send(new Features.Message.Add(accountId, messageDto));
+                var id = await this.mediator.Send(new Infrastructure.Features.Message.Add(accountId, messageDto));
 
                 return Ok(id);
             }

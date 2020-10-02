@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
-using ATech.Infrastructure.Exceptions;
+using ATech.ContactFormServer.Infrastructure.Exceptions;
+using ATech.ContactFormServer.Infrastructure.Features.Account;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +37,7 @@ namespace ATech.ContactFormServer.Api.Controllers
         {
             try
             {
-                var id = await this.mediator.Send(new Features.Account.Add(email));
+                var id = await this.mediator.Send(new Add(email));
 
                 return Ok(id);
             }

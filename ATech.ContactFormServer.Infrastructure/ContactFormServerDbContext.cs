@@ -1,32 +1,18 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Claims;
 using ATech.ContactFormServer.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
-namespace ATech.ContactFormServer.Api
+namespace ATech.ContactFormServer.Infrastructure
 {
 #pragma warning disable CS1591
     public class ContactFormServerDbContext : DbContext
     {
         private readonly DbContextOptions<ContactFormServerDbContext> options;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public ContactFormServerDbContext([NotNull] DbContextOptions<ContactFormServerDbContext> options,
-                                          IHttpContextAccessor httpContextAccessor)
+        public ContactFormServerDbContext([NotNull] DbContextOptions<ContactFormServerDbContext> options)
             : base(options)
         {
             this.options = options ?? throw new System.ArgumentNullException(nameof(options));
-            this.httpContextAccessor = httpContextAccessor ?? throw new System.ArgumentNullException(nameof(httpContextAccessor));
-        }
-
-        public string CurrentUserId
-        {
-            get
-            {
-                var userId = this.httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                return userId;
-            }
         }
 
         public DbSet<Account> Account { get; set; }
@@ -38,7 +24,7 @@ namespace ATech.ContactFormServer.Api
             base.OnModelCreating(builder);
 
             #region  Account
-            
+
             builder
                 .Entity<Account>()
                 .HasKey(a => a.Id);

@@ -1,6 +1,6 @@
 using System;
 
-namespace ATech.ContactFormServer.Api.DTO
+namespace ATech.ContactFormServer.Infrastructure.DTO
 {
     /// <summary>
     /// Message model

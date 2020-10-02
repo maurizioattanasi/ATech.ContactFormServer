@@ -25,6 +25,10 @@ This folder/namespace will contain all the entities that will be used to impleme
 
 This folder/namespace contains all the interfaces needed to implent a [Repository Pattern](https://docs.microsoft.com/it-it/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) that will be the intermediary between the domain model layers and data mapping.
 
+## ATech.ContactFormServer.Infrastructure
+
+
+
 ## ATech.ContactFormServer.Api
 
 This project contains:
@@ -37,3 +41,13 @@ This project contains:
 ## Entity Framework Core
 
 The OR/M of choice for this project is [Entity Framework Core](https://docs.microsoft.com/it-it/ef/core/), and the approach in the early stages of development of the project is [Code First](https://docs.microsoft.com/it-it/aspnet/core/data/ef-mvc/intro?view=aspnetcore-3.1) but it may change if needed.
+
+### Migrations
+
+```cmd
+$ dotnet ef migrations add initial --startup-project ../ATech.ContactFormServer.Api
+```
+
+```cmd
+$ dotnet ef database update --startup-project ../ATech.ContactFormServer.Api
+```

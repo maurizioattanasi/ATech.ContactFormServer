@@ -3,9 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using ATech.ContactFormServer.Api.Repositories;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace ATech.ContactFormServer.Api.Features.Account
+namespace ATech.ContactFormServer.Infrastructure.Features.Account
 {
     /// <summary>
     /// Adds a new account item

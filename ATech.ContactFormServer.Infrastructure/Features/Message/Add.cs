@@ -1,15 +1,15 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ATech.ContactFormServer.Api.DTO;
+using ATech.ContactFormServer.Infrastructure.DTO;
 using ATech.ContactFormServer.Api.Repositories;
-using ATech.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using ATech.ContactFormServer.Infrastructure.Exceptions;
+using System.Text.Json;
 
-namespace ATech.ContactFormServer.Api.Features.Message
+namespace ATech.ContactFormServer.Infrastructure.Features.Message
 {
     /// <summary>
     /// Adds a new message
@@ -58,7 +58,7 @@ namespace ATech.ContactFormServer.Api.Features.Message
                     using var unitOfWork = new ContactFormServerUnitOfWork(context);
 
                     if (!string.IsNullOrEmpty(request.message.Honeypot))
-                        throw new Exception($"Spam detected{Environment.NewLine}Account: {request.accountId}{Environment.NewLine}Payolad: {JsonConvert.SerializeObject(request.message)}");
+                        throw new Exception($"Spam detected{Environment.NewLine}Account: {request.accountId}{Environment.NewLine}Payolad: {JsonSerializer.Serialize(request.message)}");
 
                     var account = await unitOfWork.Accounts.GetAsync(request.accountId, cancellationToken).ConfigureAwait(false);
 
