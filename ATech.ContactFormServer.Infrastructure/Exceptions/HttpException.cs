@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ATech.Infrastructure.Exceptions
+namespace ATech.ContactFormServer.Infrastructure.Exceptions
 {
     /// <summary>
     /// Http Exception

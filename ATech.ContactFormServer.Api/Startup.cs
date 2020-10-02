@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Text;
 using ATech.ContactFormServer.Domain.Configurations;
+using ATech.ContactFormServer.Infrastructure;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -92,7 +93,7 @@ namespace ATech.ContactFormServer.Api
             this.JwtSettings = services.BuildServiceProvider().GetService<IOptions<JwtSettings>>();
 
             // MediatR
-            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(Startup).GetTypeInfo().Assembly, typeof(ContactFormServerDbContext).GetTypeInfo().Assembly);
 
             services.AddAuthentication(x =>
             {

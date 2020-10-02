@@ -4,13 +4,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ATech.ContactFormServer.Api.Repositories;
-using ATech.ContactFormServer.Domain.Entities;
-using ATech.Infrastructure.Exceptions;
+using ATech.ContactFormServer.Infrastructure.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace ATech.ContactFormServer.Api.Features.Message
+namespace ATech.ContactFormServer.Infrastructure.Features.Message
 {
     /// <summary>
     /// Returns all the messages
