@@ -1,5 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Maurizio Attanasi</Authors>
+    <Version>0.1.0</Version>
+    <Description>A .NET Core WebApi to use on static sites with contact form</Description>
+    <PackageReleaseNotes>Domain Driven Design Refactoring</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.ContactFormServer</PackageProjectUrl>
+    <Copyright>Maurizio Attanasi</Copyright>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\ATech.ContactFormServer.Domain\ATech.ContactFormServer.Domain.csproj" />
   </ItemGroup>
@@ -11,15 +21,5 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <Authors>Maurizio Attanasi</Authors>
-    <Version>0.0.1</Version>
-    <Description>A .NET Core WebApi to use on static sites with contact form</Description>
-    <PackageReleaseNotes>project setup</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.ContactFormServer</PackageProjectUrl>
-    <Copyright>Maurizio Attanasi</Copyright>
-  </PropertyGroup>
 
 </Project>

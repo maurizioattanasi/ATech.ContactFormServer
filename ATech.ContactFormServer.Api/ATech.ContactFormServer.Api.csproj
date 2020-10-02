@@ -4,9 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>Maurizio Attanasi</Authors>
     <UserSecretsId>078A46F6-7C8A-4825-95DE-A3DF54074900</UserSecretsId>
-    <Version>0.0.2</Version>
+    <Version>0.1.0</Version>
     <Description>A .NET Core WebApi to use on static sites with contact form</Description>
-    <PackageReleaseNotes>Added account management scaffolding</PackageReleaseNotes>
+    <PackageReleaseNotes>Domain Driven Design Refactoring</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.ContactFormServer</PackageProjectUrl>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
